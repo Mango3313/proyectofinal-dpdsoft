@@ -1,0 +1,39 @@
+version: '3'
+services:
+  app:
+    container_name: proyect
+    image: proyect/app
+    networks:
+      - base
+    environment:
+      - NODE_ENV=development
+      - URL_BASE=http://proyect:3000
+      - ENVIROMENT=development 
+      - PRISMA_SECRET=secret123
+      - APP_SECRET=secret123
+    build:
+      context: .
+      #dockerfile: Dockerfile.dev
+    ports:
+      - 3000:3000
+    volumes:
+      - app:/var/lib/app
+  datadog:
+    build: datadog
+    links:
+     #- redis  ensures that redis is a host that the container can find
+     - app # ensures that the web app can send metrics
+    environment:
+     - DD_API_KEY=1930accc9f5a56dd71208159d9b02b07
+    volumes:
+     - /var/run/docker.sock:/var/run/docker.sock
+     - /proc/:/host/proc/:ro
+     - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
+
+networks:
+  base:
+    driver: bridge
+
+
+volumes:
+  shared:
