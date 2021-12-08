@@ -14,7 +14,7 @@ module.exports = {
   },
 
   applyDiscount: function (req, res) {
-    //debera de restar una cantidad a cada precio en payment-generated.txt
+    //debera de restar una cantidad a cada precio en payment-generated.txt jejej
     var qty = 20;
 
     var lineReader = require("readline").createInterface({
