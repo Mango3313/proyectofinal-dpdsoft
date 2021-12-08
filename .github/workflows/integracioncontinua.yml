@@ -25,4 +25,4 @@ jobs:
         continue-on-error: true
       - name: Check if CI success
         if: steps.test.outcome != 'success'
-        run: echo "Success"
+        run: exit 1
