@@ -18,16 +18,16 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: npm install and test
         run: |
           npm install
           npm test
-      env:
-        CI: true
+        env:
+          CI: true
   deploy:
-      needs: [test]
-      runs-on: ubuntu-latest
-  
-      steps:
+    needs: [test]
+    runs-on: ubuntu-latest
+
+    steps:
       - name: SSH and deploy node app
-      run: echo "Holis"
-  
+    run: echo "Holis"
