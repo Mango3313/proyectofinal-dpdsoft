@@ -41,7 +41,7 @@ app.use('/', indexRouter);
 app.use('/tasks', tasksRouter);
 app.use('/payment', paymentRouter);
 app.listen(3000, () => {
-    console.log('Example app listening at http://localhost:3000')
+    console.log('Example app listening at port 3000')
   });
 
 module.exports = app;
