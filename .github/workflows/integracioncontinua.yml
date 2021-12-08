@@ -21,8 +21,10 @@ jobs:
       - run: npm install
         continue-on-error: true
       - run: npm test
-        id: test
+        id: cisuccess
         continue-on-error: true
       - name: Check if CI success
-        if: steps.test.outcome != 'success'
-        run: exit 1
+        if: steps.cisuccess.outcome  != 'success'
+        run: |
+        echo "Success"
+        exit 1
