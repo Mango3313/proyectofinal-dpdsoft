@@ -16,8 +16,10 @@ jobs:
           DOCKER_USER: ${{secrets.DOCKER_USER}}
           DOCKER_PASS: ${{secrets.DOCKER_PASS}}
         run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - name: Docker pulll before push
+        run: docker pull ${{secrets.DOCKER_USER}}/proyect
       - name: Build docker image
         #run: docker build . --file Dockerfile --tag proyect/dev:$(date +%s)
         run: docker tag proyect ${{secrets.DOCKER_USER}}/proyect
       - name: Push docker image 
-        run: docker push ${{secrets.DOCKER_USER}}/proyect
+        run: docker push ${{secrets.DOCKER_USER}}/proyect:$(date +%s)
