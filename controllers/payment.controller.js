@@ -26,7 +26,7 @@ module.exports = {
         var newPrice = orPrice - qty;
       var result = line.replace(/%line%/g,""+newPrice);
       fs.writeFile(PAYMENT_FILE_PATH, result, "utf8", function (err) {
-        if (err) return console.log(err);
+        if (err) return console.log("Error:"+err);
       });
     });
 
