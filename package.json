@@ -7,9 +7,7 @@
     "prestart": "npm install",
     "pretest": "npm install",
     "test": "./node_modules/.bin/mocha test --exit",
-    "rebuild": "npm run clean && npm run build",
-    "postinstall": "npm run build",
-    "start:prod": "node bin/www"
+    "start:prod": "npm start"
   },
   "dependencies": {
     "@sentry/node": "^6.15.0",
