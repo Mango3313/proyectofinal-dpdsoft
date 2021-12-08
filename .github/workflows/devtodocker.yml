@@ -1,0 +1,23 @@
+name: Development deploy
+
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [develop]
+
+jobs:
+  deploy:
+    name: Deploy on docker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Docker login
+        env:
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          DOCKER_PASS: ${{secrets.DOCKER_PASS}}
+        run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - name: Build docker image
+        run: docker build . --file Dockerfile --tag proyect/dev:$(date +%s)
+      - name: Push docker image
+        run: docker push ${{secrets.DOCKER_USER}}/proyect
