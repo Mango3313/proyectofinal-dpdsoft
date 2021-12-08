@@ -22,4 +22,4 @@ jobs:
         #run: docker build . --file Dockerfile --tag proyect/dev:$(date +%s)
         run: docker tag proyect ${{secrets.DOCKER_USER}}/proyect
       - name: Push docker image 
-        run: docker push ${{secrets.DOCKER_USER}}/proyect:$(date +%s)
+        run: docker push ${{secrets.DOCKER_USER}}/proyect
