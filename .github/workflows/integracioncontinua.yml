@@ -6,8 +6,8 @@ on:
     branches: [master]
 
 jobs:
-  build:
-    name: Build
+  test:
+    name: Test
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -18,11 +18,16 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install
-        continue-on-error: true
-      - run: npm test
-        id: cisuccess
-        continue-on-error: true
-      - name: Check if CI success
-        if: steps.cisuccess.outcome  != 'success'
-        run: exit 1
+        run: |
+          npm install
+          npm test
+      env:
+        CI: true
+  deploy:
+      needs: [test]
+      runs-on: ubuntu-latest
+  
+      steps:
+      - name: SSH and deploy node app
+      run: echo "Holis"
+  
