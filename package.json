@@ -7,7 +7,6 @@
     "prestart": "npm install",
     "pretest": "npm install",
     "test": "./node_modules/.bin/mocha test --exit",
-    "postinstall": "npm run build",
     "start:prod": "node dist/index.js"
   },
   "dependencies": {
