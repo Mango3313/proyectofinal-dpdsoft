@@ -42,7 +42,7 @@ app.use('/auth', authRouter);
 app.use('/', indexRouter);
 app.use('/tasks', tasksRouter);
 app.use('/payment', paymentRouter);
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('Example app listening at 3000')
   });
 
