@@ -34,10 +34,6 @@ Sentry.init({
     // We recommend adjusting this value in production
     tracesSampleRate: 1.0,
   });
-  const transaction = Sentry.startTransaction({
-    op: "test",
-    name: "My First Test Transaction",
-  });
 app.use('/auth', authRouter);
 app.use('/', indexRouter);
 app.use('/tasks', tasksRouter);
