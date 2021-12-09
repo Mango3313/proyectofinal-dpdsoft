@@ -39,7 +39,7 @@ app.use('/', indexRouter);
 app.use('/tasks', tasksRouter);
 app.use('/payment', paymentRouter);
 app.listen(process.env.PORT || 3000, () => {
-    console.log('Example app listening at 3000')
+    console.log('Example app now running')
   });
 
 module.exports = app;
