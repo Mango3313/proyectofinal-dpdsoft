@@ -8,7 +8,7 @@ module.exports = async function (req, res, next) {
         const xApiKey = req.headers['x-api-key'];
         if(!xApiKey) return res.status(401).send();
         if(keys.includes(xApiKey)) return next();
-        return res.status(401).send();
+        return res.status(401).send({message: "Forbidden"});
     } catch (error) {
         return res.status(401).send({
             error: "keys-notfound"

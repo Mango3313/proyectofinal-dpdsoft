@@ -4,9 +4,10 @@ var paymentController = require('../controllers/payment.controller');
 var middleware = require('../middleware');
 
 
-//router.use(middleware);
+router.use(middleware);
 
-router
-    .get('/promos', paymentController.getPromos);
+router.get('/create',paymentController.create)
+router.get('/promos', paymentController.getPromos);
+router.post('/applydiscount',paymentController.applyDiscount);
 
 module.exports = router;
