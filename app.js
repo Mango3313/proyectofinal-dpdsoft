@@ -3,7 +3,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var StatsD = require("hot-shots");
-const PAYMENT_FILE_PATH = path.resolve("./payment-generated.txt");
+const PAYMENT_FILE_PATH = "./payment-generated.txt";
 const VALID_KEYS_PATH = './valid-keys.txt';
 const fs = require("fs");
 
@@ -45,14 +45,18 @@ app.use("/payment", paymentRouter);
 app.use("/shipment",shipmentRouter);
 app.listen(process.env.PORT || 3000, function () {
   // server ready to accept connections here
-  fs.open(PAYMENT_FILE_PATH, 'a', function (err, file) {
-    if (err) throw err;
-    console.log('File is opened in write mode.');
-  });
-  fs.open(VALID_KEYS_PATH, 'a', function (err, file) {
-    if (err) throw err;
-    console.log('File is opened in write mode.');
-  });
+  /*
+  if(!fs.existsSync(PAYMENT_FILE_PATH)){
+    var fdp = fs.open(PAYMENT_FILE_PATH, 'a', function (err, file) {
+      if (err) throw err;
+    });
+  }
+  if(!fs.existsSync(VALID_KEYS_PATH)){
+      var fdk = fs.open(VALID_KEYS_PATH, 'a', function (err, file) {
+        if (err) throw err;
+      });
+    }
+  */
   console.log("App deployed");
 });
 

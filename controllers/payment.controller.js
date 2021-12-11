@@ -39,12 +39,13 @@ module.exports = {
   },
 
   getPromos: function (req, res) {
-    res.json([
+    var response = [
       { name: "BUENFIN" },
       { name: "HOTSALE" },
       { name: "CYBERMONDAY" },
       { name: "BLACKFRIDAY" },
       { name: "PRIMEDAY" },
-    ]);
+    ]
+    res.json(response);
   },
 };

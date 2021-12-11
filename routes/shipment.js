@@ -3,7 +3,6 @@ var router = express.Router();
 var shipmentController = require("../controllers/shipment.controller");
 var middleware = require("../middleware");
 
-//router.get('/:id', tasksController.getById);
 
 router.use(middleware);
 
