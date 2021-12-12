@@ -4,9 +4,9 @@ var operationsController = require("../controllers/operations.controller");
 var middleware = require("../middleware");
 
 
-router.use(middleware);
+//router.use(middleware);
 
-router.post("/sum", operationsController.sum);
+router.get("/sum", operationsController.sum);
 router.get("/substract", operationsController.substract);
 router.get("/divide", operationsController.divide);
 router.get("/multiply", operationsController.multiply);
