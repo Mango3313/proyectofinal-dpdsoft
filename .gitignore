@@ -1,4 +1,7 @@
 node_modules
+
 *.txt
 *.xml
 *.log
+
+README.md

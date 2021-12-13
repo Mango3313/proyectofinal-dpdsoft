@@ -134,7 +134,6 @@ describe('express_authentication', () => {
             ], res => res)
             .then(responseList => {
                 responseList.forEach((response, i) => {
-                    console.log(response.status,i);
                     if (i !== 2) {
                         response.status.should.match(/^20[0|1]/);
                     } else {
