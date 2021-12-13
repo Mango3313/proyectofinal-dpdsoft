@@ -16,26 +16,45 @@ module.exports = {
   applyDiscount: function (req, res) {
     //debera de restar una cantidad a cada precio en payment-generated.txt
     var { qyt } = req.body;
-
-    //console.log(qyt);
-
+    var data = fs.readFileSync(PAYMENT_FILE_PATH);
+    var arrayOfPrices = data.toString().trim().split(LINE_ENDING);
+    var jsonRes = [];
+    var newText = "";
+    arrayOfPrices.forEach((val, i, ar) => {
+      var newPrice = Number(val) - Number(qyt);
+       jsonRes.push(Object.price = newPrice);
+      newText += newPrice + LINE_ENDING; 
+    });
+    var stream = fs.createWriteStream(PAYMENT_FILE_PATH, { flags: "w" });
+      stream.write(newText);
+      stream.end();
+    /**
     var lineReader = require("readline").createInterface({
       input: require("fs").createReadStream(PAYMENT_FILE_PATH),
     });
-    var newFile = "";
     lineReader.on("line", function (line) {
-      var orPrice = Number(line);
-      var newPrice = (orPrice - qyt).toFixed(2);
-      fs.readFile(PAYMENT_FILE_PATH, 'utf8', function(err, data) {
-        let re = new RegExp('^.*' + line + '.*$', 'gm');
-        let formatted = data.replace(re, ''+newPrice+LINE_ENDING);
-        fs.writeFile(PAYMENT_FILE_PATH,formatted,(err, file)=>{
-          if(err) console.log(err);
-        });
-    });
-   });
+      var rd = fs.createReadStream(PAYMENT_FILE_PATH);
+      rd.on("error", function (err) {
+        console.error(err);
+      });
+      var wr = fs.createWriteStream(PAYMENT_FILE_PATH);
+      wr.on("line", function (error) {
+        if (error) console.error(error);
+        var orPrice = Number(line);
+        var newPrice = (orPrice - qyt).toFixed(2);
 
-    res.json({ message: "File updated succesfully!" });
+      });
+      wr.on("error", function (err) {
+        console.error(err);
+      });
+      wr.on("close", function (ex) {
+        console.error(ex);
+      });
+      rd.pipe(wr);
+    });
+     **/
+
+    res.json({ message: "File updated succesfully!", resData: jsonRes });
   },
 
   getPromos: function (req, res) {
@@ -45,7 +64,7 @@ module.exports = {
       { name: "CYBERMONDAY" },
       { name: "BLACKFRIDAY" },
       { name: "PRIMEDAY" },
-    ]
+    ];
     res.json(response);
   },
 };
