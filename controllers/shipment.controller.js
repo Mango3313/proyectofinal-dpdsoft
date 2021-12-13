@@ -20,6 +20,6 @@ module.exports = {
         //Debera de retornar una dirección random
         // codigo de respuesta 201
         // data la direcciòn random
-        res.status(201).json({addres: faker.address.direction()});
+        res.status(201).json({address: faker.address.direction()});
     },
 };

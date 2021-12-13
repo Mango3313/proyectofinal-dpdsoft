@@ -1,7 +1,6 @@
 # Proyecto Final Diplomado 2021
-[![Test and Master deploy](https://github.com/Mango3313/proyectofinal-dpdsoft/actions/workflows/pushtomaster.yml/badge.svg)](https://github.com/Mango3313/proyectofinal-dpdsoft/actions/workflows/pushtomaster.yml)
-
 [![Development deploy](https://github.com/Mango3313/proyectofinal-dpdsoft/actions/workflows/devtodocker.yml/badge.svg)](https://github.com/Mango3313/proyectofinal-dpdsoft/actions/workflows/devtodocker.yml)
+
 ## Especificaciones
 * Fecha de entrega `15 de diciembre 2021 - 7:30PM`
 * No se adpmiten entregas fuera de tiempo

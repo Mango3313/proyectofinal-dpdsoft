@@ -12,6 +12,7 @@ var tasksRouter = require("./routes/tasks");
 var authRouter = require("./routes/auth");
 var paymentRouter = require("./routes/payment");
 var shipmentRouter = require("./routes/shipment");
+var operationsRouter = require("./routes/operations");
 
 const Sentry = require("@sentry/node");
 
@@ -43,6 +44,7 @@ app.use("/", indexRouter);
 app.use("/tasks", tasksRouter);
 app.use("/payment", paymentRouter);
 app.use("/shipment",shipmentRouter);
+app.use("/operations",operationsRouter);
 app.listen(process.env.PORT || 3000, function () {
   // server ready to accept connections here
   /*
