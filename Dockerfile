@@ -19,4 +19,4 @@ ENV HOST=0.0.0.0 PORT=3001
 
 EXPOSE ${PORT}
 
-CMD ["yarn", "start"]
+CMD ["node", "app.js"]
