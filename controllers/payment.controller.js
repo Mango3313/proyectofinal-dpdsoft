@@ -10,7 +10,7 @@ module.exports = {
     var stream = fs.createWriteStream(PAYMENT_FILE_PATH, { flags: "a" });
     stream.write(price + LINE_ENDING);
     stream.end();
-    res.status(201).send();
+    res.status(201).send({message:"Precio creado correctamente", price: price});
   },
 
   applyDiscount: function (req, res) {

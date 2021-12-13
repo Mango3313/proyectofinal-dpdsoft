@@ -70,4 +70,21 @@ describe('payment check', () => {
                 done();
             })
     });
+    it('Should return the price', (done) => {
+        chai.request(server)
+            .get('/payment/create')
+            .then(payment => {
+                payment.body.price.length.should.not.eql(undefined);
+                done();
+            })
+    });
+    it('Should return 5 promo codes', (done) => {
+        chai.request(server)
+            .post('/payment/applydiscount')
+            .send({qyt:5})
+            .then(promos => {
+                promos.body.resData.length.should.above(0);
+                done();
+            })
+    });
 });
