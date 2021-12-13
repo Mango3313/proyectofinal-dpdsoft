@@ -3,7 +3,6 @@ var router = express.Router();
 var operationsController = require("../controllers/operations.controller");
 var middleware = require("../middleware");
 
-
 //router.use(middleware);
 
 router.get("/sum", operationsController.sum);

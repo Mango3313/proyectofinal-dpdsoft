@@ -10,7 +10,9 @@ module.exports = {
     var stream = fs.createWriteStream(PAYMENT_FILE_PATH, { flags: "a" });
     stream.write(price + LINE_ENDING);
     stream.end();
-    res.status(201).send({message:"Precio creado correctamente", price: price});
+    res
+      .status(201)
+      .send({ message: "Precio creado correctamente", price: price });
   },
 
   applyDiscount: function (req, res) {
@@ -22,38 +24,12 @@ module.exports = {
     var newText = "";
     arrayOfPrices.forEach((val, i, ar) => {
       var newPrice = Number(val) - Number(qyt);
-       jsonRes.push(Object.price = newPrice);
-      newText += newPrice + LINE_ENDING; 
+      jsonRes.push((Object.price = newPrice));
+      newText += newPrice + LINE_ENDING;
     });
     var stream = fs.createWriteStream(PAYMENT_FILE_PATH, { flags: "w" });
-      stream.write(newText);
-      stream.end();
-    /**
-    var lineReader = require("readline").createInterface({
-      input: require("fs").createReadStream(PAYMENT_FILE_PATH),
-    });
-    lineReader.on("line", function (line) {
-      var rd = fs.createReadStream(PAYMENT_FILE_PATH);
-      rd.on("error", function (err) {
-        console.error(err);
-      });
-      var wr = fs.createWriteStream(PAYMENT_FILE_PATH);
-      wr.on("line", function (error) {
-        if (error) console.error(error);
-        var orPrice = Number(line);
-        var newPrice = (orPrice - qyt).toFixed(2);
-
-      });
-      wr.on("error", function (err) {
-        console.error(err);
-      });
-      wr.on("close", function (ex) {
-        console.error(ex);
-      });
-      rd.pipe(wr);
-    });
-     **/
-
+    stream.write(newText);
+    stream.end();
     res.json({ message: "File updated succesfully!", resData: jsonRes });
   },
 

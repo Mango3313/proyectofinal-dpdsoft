@@ -1,90 +1,88 @@
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const path = require('path');
-const server = require('../app');
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const path = require("path");
+const server = require("../app");
 const should = chai.should();
-const sinon = require('sinon');
-const payment = require('../controllers/payment.controller');
-const PAYMENT_FILE_PATH = './payment-generated.txt';
-const {Request, Response} = require('./mock');
-const utils = require('./utils');
-const {uniq} = require('lodash');
-const Promise = require('bluebird');
+const sinon = require("sinon");
+const payment = require("../controllers/payment.controller");
+const PAYMENT_FILE_PATH = "./payment-generated.txt";
+const { Request, Response } = require("./mock");
+const utils = require("./utils");
+const { uniq } = require("lodash");
+const Promise = require("bluebird");
 
 chai.use(chaiHttp);
 
-describe('payment check', () => {
-    let req, res, next, agent;
+describe("payment check", () => {
+  let req, res, next, agent;
 
-    beforeEach((done) => {
-        req = new Request();
-        res = new Response();
-        next = sinon.stub();
-        utils.generatePaymentFile()
-            .then(() => {
-                done();
-            })
+  beforeEach((done) => {
+    req = new Request();
+    res = new Response();
+    next = sinon.stub();
+    utils.generatePaymentFile().then(() => {
+      done();
     });
+  });
 
-    afterEach((done) => {
-        if (agent) {
-            agent.close();
-        }
-        utils.removeFile(PAYMENT_FILE_PATH)
-          .then(() => done() )
-    });
+  afterEach((done) => {
+    if (agent) {
+      agent.close();
+    }
+    utils.removeFile(PAYMENT_FILE_PATH).then(() => done());
+  });
 
-    it('Should generate an random price', (done) => {
-        payment.create(req, res);
-        setTimeout(() => {
-            utils.getFromFile(PAYMENT_FILE_PATH)
-                .then(data => {
-                    data.length.should.eql(1);
-                    done();
-                })
-        }, 500);
-    });
+  it("Should generate an random price", (done) => {
+    payment.create(req, res);
+    setTimeout(() => {
+      utils.getFromFile(PAYMENT_FILE_PATH).then((data) => {
+        data.length.should.eql(1);
+        done();
+      });
+    }, 500);
+  });
 
-    it('Should generate 5 random prices', (done) => {
-        let n = 10;
-        for (let i = 0; i < n; i++) {
-            payment.create(req, res);
-        }
-        setTimeout(() => {
-            utils.getFromFile(PAYMENT_FILE_PATH)
-                .then(data => {
-                    data.length.should.eql(n);
-                    const uniqKeys = uniq(data);
-                    uniqKeys.length.should.eql(data.length);
-                    done();
-                })
-        }, 500);
-    });
+  it("Should generate 5 random prices", (done) => {
+    let n = 10;
+    for (let i = 0; i < n; i++) {
+      payment.create(req, res);
+    }
+    setTimeout(() => {
+      utils.getFromFile(PAYMENT_FILE_PATH).then((data) => {
+        data.length.should.eql(n);
+        const uniqKeys = uniq(data);
+        uniqKeys.length.should.eql(data.length);
+        done();
+      });
+    }, 500);
+  });
 
-
-    it('Should return 5 promo codes', (done) => {
-        chai.request(server)
-            .get('/payment/promos')
-            .then(promos => {
-                promos.body.length.should.eql(5);
-                done();
-            })
-    });
-    it('Should return the price', (done) => {
-        chai.request(server)
-            .get('/payment/create')
-            .then(payment => {
-                payment.body.price.length.should.not.eql(undefined);
-                done();
-            })
-    });
-    it('Should return 5 promo codes', (done) => {
-        chai.request(server)
-            .post('/payment/applydiscount')
-            .send({qyt:5})
-            .then(promos => {
-                promos.body.resData.length.should.above(0);
-                done();
-            })
-    });
+  it("Should return 5 promo codes", (done) => {
+    chai
+      .request(server)
+      .get("/payment/promos")
+      .then((promos) => {
+        promos.body.length.should.eql(5);
+        done();
+      });
+  });
+  it("Should return the price", (done) => {
+    chai
+      .request(server)
+      .get("/payment/create")
+      .then((payment) => {
+        payment.body.price.length.should.not.eql(undefined);
+        done();
+      });
+  });
+  it("Should return 5 promo codes", (done) => {
+    chai
+      .request(server)
+      .post("/payment/applydiscount")
+      .send({ qyt: 5 })
+      .then((promos) => {
+        promos.body.resData.length.should.above(0);
+        done();
+      });
+  });
 });

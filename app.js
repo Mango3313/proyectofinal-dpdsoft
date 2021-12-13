@@ -4,7 +4,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var StatsD = require("hot-shots");
 const PAYMENT_FILE_PATH = "./payment-generated.txt";
-const VALID_KEYS_PATH = './valid-keys.txt';
+const VALID_KEYS_PATH = "./valid-keys.txt";
 const fs = require("fs");
 
 var indexRouter = require("./routes/index");
@@ -43,8 +43,8 @@ app.use("/auth", authRouter);
 app.use("/", indexRouter);
 app.use("/tasks", tasksRouter);
 app.use("/payment", paymentRouter);
-app.use("/shipment",shipmentRouter);
-app.use("/operations",operationsRouter);
+app.use("/shipment", shipmentRouter);
+app.use("/operations", operationsRouter);
 app.listen(process.env.PORT || 3000, function () {
   // server ready to accept connections here
   /*
@@ -61,6 +61,5 @@ app.listen(process.env.PORT || 3000, function () {
   */
   console.log("App deployed");
 });
-
 
 module.exports = app;
