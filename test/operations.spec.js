@@ -21,7 +21,7 @@ describe("Operations test", () => {
     var B = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
     chai
       .request(server)
-      .get("/operations/sum?A="+A+"&B="+B)
+      .get("/operations/sum?A=" + A + "&B=" + B)
       .then((shipment) => {
         shipment.body.result.should.eql(Number(A) + Number(B));
         done();
@@ -35,7 +35,7 @@ describe("Operations test", () => {
     var B = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
     chai
       .request(server)
-      .get("/operations/substract?A="+A+"&B="+B)
+      .get("/operations/substract?A=" + A + "&B=" + B)
       .then((shipment) => {
         shipment.body.result.should.eql(Number(A) - Number(B));
         done();
@@ -48,7 +48,7 @@ describe("Operations test", () => {
     var B = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
     chai
       .request(server)
-      .get("/operations/multiply?A="+A+"&B="+B)
+      .get("/operations/multiply?A=" + A + "&B=" + B)
       .then((shipment) => {
         shipment.body.result.should.eql(Number(A) * Number(B));
         done();
@@ -62,7 +62,7 @@ describe("Operations test", () => {
     chai
 
       .request(server)
-      .get("/operations/divide?A="+A+"&B="+B)
+      .get("/operations/divide?A=" + A + "&B=" + B)
       .then((operations) => {
         operations.body.result.should.eql(Number(A) / Number(B));
         done();
@@ -76,7 +76,7 @@ describe("Operations test", () => {
     chai
 
       .request(server)
-      .get("/operations/divide?A="+A+"&B="+B)
+      .get("/operations/divide?A=" + A + "&B=" + B)
       .then((operations) => {
         operations.body.error.should.not.eql(undefined);
         done();
