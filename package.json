@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node app.js",
+    "start": "pm2-runtime start ecosystem.config.js --env production",
     "prestart": "npm install",
     "pretest": "npm install",
     "test": "./node_modules/.bin/mocha test --exit",
@@ -26,6 +26,7 @@
     "mocha-junit-reporter": "1.23.3",
     "mocha-multi-reporters": "1.1.7",
     "morgan": "~1.9.1",
+    "pm2": "^5.1.2",
     "shortid": "2.2.15",
     "sinon": "9.0.0"
   },
