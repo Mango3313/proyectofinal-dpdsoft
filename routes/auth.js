@@ -1,9 +1,7 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var keyStore = require('../key-store');
+var keyStore = require("../key-store");
 
-
-router.get('/', keyStore);
-
+router.get("/", keyStore);
 
 module.exports = router;
